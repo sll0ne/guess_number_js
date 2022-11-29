@@ -2,19 +2,32 @@ import {
     messageOutput
 } from "./View.js";
 
+import {
+    addAttempt,
+    editGame
+} from "./DB.js";
+
 export const
     blockGreeting = document.getElementById("greeting"),
     blockInformation = document.getElementById("information"),
     blockShowGame = document.getElementById("show-game"),
     blockMessage = document.getElementById("message"),
     blockResult = document.getElementById("result"),
-    blockResultText = document.getElementById("resultText");
+    blockResultText = document.getElementById("resultText"),
+    blockGameMenu = document.getElementById("GameMenu"),
+    blockList = document.getElementById("list"),
+    blockTextList = document.getElementById("textList");
 
 export const
-    btnNextInfo = document.getElementById("nextInfo"),
+    btnGoMenu = document.getElementById("goMenu"),
+    btnNextGameMenu = document.getElementById("nextInfo"),
     btnNextShowGame = document.getElementById("nextShowGame"),
     btnCheckNumber = document.getElementById("checkNumber"),
-    btnReplayGame = document.getElementById("replayGame");
+    btnReplayGame = document.getElementById("replayGame"),
+    btnNewGame = document.getElementById("newGame"),
+    btnListAllGame = document.getElementById("listAllGame"),
+    btnListWinGame = document.getElementById("listWinGame"),
+    btnListLostGame = document.getElementById("listLostGame");
 
 export const
     fieldName = document.getElementById("name"),
@@ -24,7 +37,7 @@ export const
     textInfo = document.getElementById("info");
 
 export const
-    numAttempt = 3,
+    numAttempt = 5,
     maxNum = 10;
 
 export let
@@ -38,21 +51,26 @@ export function checkNumber() {
         alert("Enter the number!");
     } else {
         getNumber = Number(field_getNumber.value);
-        if (var_numAttempt !== 0 ) {
+        if (var_numAttempt !== 1) {
             if (getNumber < hiddenNumber) {
                 var_numAttempt--;
                 messageOutput("less");
+                addAttempt((numAttempt - var_numAttempt), getNumber, "less");
             }
             if (getNumber > hiddenNumber) {
                 var_numAttempt--;
                 messageOutput("more");
+                addAttempt((numAttempt - var_numAttempt), getNumber, "more");
             }
             if (getNumber === hiddenNumber) {
                 messageOutput("win");
+                addAttempt((numAttempt - var_numAttempt), getNumber, "win");
+                editGame("win");
             }
-        } 
-        else {
-            messageOutput("loose");
+        } else {
+            messageOutput("lost");
+            editGame("lost");
+            addAttempt((numAttempt - var_numAttempt + 1), getNumber, "loss");
         }
     }
 }

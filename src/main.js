@@ -1,21 +1,34 @@
 import {
     startGame,
     informationOutput,
-    showGameOutput
+    showGameOutput,
+    GameMenu
 } from './View.js';
 
 import {
-    btnNextInfo,
+    btnNextGameMenu,
     btnNextShowGame,
     btnCheckNumber,
     btnReplayGame,
-    checkNumber
+    btnNewGame,
+    btnGoMenu,
+    checkNumber,
+    btnListAllGame,
+    btnListWinGame,
+    btnListLostGame
 } from "./Model.js";
 
+import {getAllGame, getLossGame, getWinGame, startDB} from "./DB.js";
 
 startGame();
 
-btnNextInfo.addEventListener("click", informationOutput);
+document.addEventListener("DOMContentLoaded", startDB);
+btnNextGameMenu.addEventListener("click", GameMenu);
+btnNewGame.addEventListener("click", informationOutput);
 btnNextShowGame.addEventListener("click", showGameOutput);
 btnCheckNumber.addEventListener("click", checkNumber);
 btnReplayGame.addEventListener("click", showGameOutput);
+btnGoMenu.addEventListener("click", GameMenu);
+btnListAllGame.addEventListener("click", getAllGame);
+btnListWinGame.addEventListener("click", getWinGame);
+btnListLostGame.addEventListener("click", getLossGame);
