@@ -11,5 +11,5 @@
 * * * 
 
 * Инструкция по запуску игры: 
-    * Перейти по ссылке : https://ma-karov.github.io/JsAppTask06/
+    * Перейти по ссылке : https://sll0ne.github.io/guess_number_js/
     * Следовать указанием игры.
